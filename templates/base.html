@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Blay Driver Management{% endblock %}</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Optional Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .footer {
+            padding: 1.5rem 0;
+            background-color: #f1f1f1;
+            margin-top: 2rem;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/">Baly | بَلي</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Messages/Alerts -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Page Content -->
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; {% now "Y" %} Blay. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="mb-0">
+                        <a href="#" class="text-decoration-none text-muted me-2">Privacy Policy</a>
+                        <a href="#" class="text-decoration-none text-muted">Terms of Service</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Optional: jQuery (if needed) -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
