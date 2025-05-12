@@ -15,14 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # from django.contrib import admin
-from django.urls import path
-from django.contrib import admin
+# blay/urls.py
 
-from drivers.views import driver_registration, registration_success
+from django.contrib import admin
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from drivers.views import driver_registration, registration_success, save_step_one
 
 urlpatterns = [
-    #    path('admin/', admin.site.urls),
-    path("admin/", admin.site.urls),
+    path('admin/', admin.site.urls),
     path('register/', driver_registration, name='driver_registration'),
+    path('save-step-one/', save_step_one, name='save_step_one'),  # Handles Step 1 form save via AJAX
     path('success/', registration_success, name='registration_success'),
 ]
+
+# Serve media files during development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

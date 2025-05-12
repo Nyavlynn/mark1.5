@@ -2,12 +2,25 @@
 from django import forms
 from .models import Driver
 
+# Iraqi governorates with default placeholder
+CITY_CHOICES = [
+    ('', 'اختر المحافظة'),
+    ('baghdad', 'بغداد'),
+    ('basra', 'البصرة'),
+    ('najaf', 'النجف'),
+    ('karbala', 'كربلاء'),
+    ('babel', 'بابل'),
+    ('diyala', 'ديالى'),
+]
 
 class DriverForm(forms.ModelForm):
-    # Add a checkbox for car ownership
-    car_not_owned = forms.BooleanField(
-        required=False,
-        label="The car isn't owned by me"
+    # Checkbox for car ownership
+
+    # Override city as a ChoiceField with placeholder
+    city = forms.ChoiceField(
+        choices=CITY_CHOICES,
+        label="المحافظة",
+        widget=forms.Select(attrs={'class': 'form-select'})
     )
 
     class Meta:
@@ -19,7 +32,6 @@ class DriverForm(forms.ModelForm):
         ]
         widgets = {
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'city': forms.TextInput(attrs={'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-select'}),
             'id_document': forms.FileInput(attrs={'class': 'form-control'}),
             'car_info_document': forms.FileInput(attrs={'class': 'form-control'}),
